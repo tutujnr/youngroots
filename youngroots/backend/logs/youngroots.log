@@ -1,0 +1,1012 @@
+WARNING 2026-05-10 11:40:34,671 log Not Found: /
+WARNING 2026-05-10 11:40:34,695 basehttp "GET / HTTP/1.1" 404 179
+WARNING 2026-05-10 11:40:39,277 log Not Found: /favicon.ico
+WARNING 2026-05-10 11:40:39,282 basehttp "GET /favicon.ico HTTP/1.1" 404 179
+WARNING 2026-05-10 11:41:23,269 log Not Found: /api/v1/ai/
+WARNING 2026-05-10 11:41:23,273 basehttp "GET /api/v1/ai/ HTTP/1.1" 404 179
+WARNING 2026-05-10 11:41:30,765 log Not Found: /api/v1/ai/
+WARNING 2026-05-10 11:41:30,783 basehttp "GET /api/v1/ai/ HTTP/1.1" 404 179
+WARNING 2026-05-10 11:42:36,538 log Not Found: /api/v1/auth/
+WARNING 2026-05-10 11:42:36,541 basehttp "GET /api/v1/auth/ HTTP/1.1" 404 179
+WARNING 2026-05-10 11:42:59,588 log Not Found: /api/v1/auth/
+WARNING 2026-05-10 11:42:59,598 basehttp "GET /api/v1/auth/ HTTP/1.1" 404 179
+WARNING 2026-05-10 11:43:00,266 log Not Found: /api/v1/auth/
+WARNING 2026-05-10 11:43:00,271 basehttp "GET /api/v1/auth/ HTTP/1.1" 404 179
+WARNING 2026-05-10 11:43:00,833 log Not Found: /api/v1/auth/
+WARNING 2026-05-10 11:43:00,837 basehttp "GET /api/v1/auth/ HTTP/1.1" 404 179
+ERROR 2026-05-10 11:44:43,287 log Internal Server Error: /admin/login/
+Traceback (most recent call last):
+  File "C:\Users\CS50\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\CS50\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\core\handlers\base.py", line 220, in _get_response
+    response = response.render()
+               ^^^^^^^^^^^^^^^^^
+  File "C:\Users\CS50\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\template\response.py", line 114, in render
+    self.content = self.rendered_content
+                   ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\CS50\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\template\response.py", line 92, in rendered_content
+    return template.render(context, self._request)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\CS50\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\template\backends\django.py", line 61, in render
+    return self.template.render(context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\CS50\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\template\base.py", line 175, in render
+    return self._render(context)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\CS50\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\template\base.py", line 167, in _render
+    return self.nodelist.render(context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\CS50\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\template\base.py", line 1005, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\CS50\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\template\base.py", line 1005, in <listcomp>
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\CS50\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\template\base.py", line 966, in render_annotated
+    return self.render(context)
+           ^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\CS50\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\template\loader_tags.py", line 157, in render
+    return compiled_parent._render(context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\CS50\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\template\base.py", line 167, in _render
+    return self.nodelist.render(context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\CS50\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\template\base.py", line 1005, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\CS50\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\template\base.py", line 1005, in <listcomp>
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\CS50\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\template\base.py", line 966, in render_annotated
+    return self.render(context)
+           ^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\CS50\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\template\loader_tags.py", line 157, in render
+    return compiled_parent._render(context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\CS50\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\template\base.py", line 167, in _render
+    return self.nodelist.render(context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\CS50\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\template\base.py", line 1005, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\CS50\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\template\base.py", line 1005, in <listcomp>
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\CS50\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\template\base.py", line 966, in render_annotated
+    return self.render(context)
+           ^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\CS50\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\template\loader_tags.py", line 63, in render
+    result = block.nodelist.render(context)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\CS50\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\template\base.py", line 1005, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\CS50\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\template\base.py", line 1005, in <listcomp>
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\CS50\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\template\base.py", line 966, in render_annotated
+    return self.render(context)
+           ^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\CS50\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\templatetags\static.py", line 116, in render
+    url = self.url(context)
+          ^^^^^^^^^^^^^^^^^
+  File "C:\Users\CS50\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\templatetags\static.py", line 113, in url
+    return self.handle_simple(path)
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\CS50\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\templatetags\static.py", line 129, in handle_simple
+    return staticfiles_storage.url(path)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\CS50\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\contrib\staticfiles\storage.py", line 203, in url
+    return self._url(self.stored_name, name, force)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\CS50\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\contrib\staticfiles\storage.py", line 182, in _url
+    hashed_name = hashed_name_func(*args)
+                  ^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\CS50\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\contrib\staticfiles\storage.py", line 513, in stored_name
+    raise ValueError(
+ValueError: Missing staticfiles manifest entry for 'admin/css/base.css'
+ERROR 2026-05-10 11:44:43,327 basehttp "GET /admin/login/?next=/admin/ HTTP/1.1" 500 145
+ERROR 2026-05-10 11:49:56,017 log Internal Server Error: /admin/login/
+Traceback (most recent call last):
+  File "C:\Users\CS50\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\CS50\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\core\handlers\base.py", line 220, in _get_response
+    response = response.render()
+               ^^^^^^^^^^^^^^^^^
+  File "C:\Users\CS50\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\template\response.py", line 114, in render
+    self.content = self.rendered_content
+                   ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\CS50\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\template\response.py", line 92, in rendered_content
+    return template.render(context, self._request)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\CS50\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\template\backends\django.py", line 61, in render
+    return self.template.render(context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\CS50\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\template\base.py", line 175, in render
+    return self._render(context)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\CS50\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\template\base.py", line 167, in _render
+    return self.nodelist.render(context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\CS50\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\template\base.py", line 1005, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\CS50\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\template\base.py", line 1005, in <listcomp>
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\CS50\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\template\base.py", line 966, in render_annotated
+    return self.render(context)
+           ^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\CS50\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\template\loader_tags.py", line 157, in render
+    return compiled_parent._render(context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\CS50\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\template\base.py", line 167, in _render
+    return self.nodelist.render(context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\CS50\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\template\base.py", line 1005, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\CS50\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\template\base.py", line 1005, in <listcomp>
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\CS50\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\template\base.py", line 966, in render_annotated
+    return self.render(context)
+           ^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\CS50\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\template\loader_tags.py", line 157, in render
+    return compiled_parent._render(context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\CS50\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\template\base.py", line 167, in _render
+    return self.nodelist.render(context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\CS50\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\template\base.py", line 1005, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\CS50\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\template\base.py", line 1005, in <listcomp>
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\CS50\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\template\base.py", line 966, in render_annotated
+    return self.render(context)
+           ^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\CS50\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\template\loader_tags.py", line 63, in render
+    result = block.nodelist.render(context)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\CS50\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\template\base.py", line 1005, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\CS50\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\template\base.py", line 1005, in <listcomp>
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\CS50\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\template\base.py", line 966, in render_annotated
+    return self.render(context)
+           ^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\CS50\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\templatetags\static.py", line 116, in render
+    url = self.url(context)
+          ^^^^^^^^^^^^^^^^^
+  File "C:\Users\CS50\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\templatetags\static.py", line 113, in url
+    return self.handle_simple(path)
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\CS50\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\templatetags\static.py", line 129, in handle_simple
+    return staticfiles_storage.url(path)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\CS50\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\contrib\staticfiles\storage.py", line 203, in url
+    return self._url(self.stored_name, name, force)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\CS50\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\contrib\staticfiles\storage.py", line 182, in _url
+    hashed_name = hashed_name_func(*args)
+                  ^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\CS50\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\contrib\staticfiles\storage.py", line 513, in stored_name
+    raise ValueError(
+ValueError: Missing staticfiles manifest entry for 'admin/css/base.css'
+ERROR 2026-05-10 11:49:56,166 basehttp "GET /admin/login/?next=/admin/ HTTP/1.1" 500 145
+ERROR 2026-05-10 11:58:48,376 log Internal Server Error: /admin/login/
+Traceback (most recent call last):
+  File "C:\Users\CS50\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\core\files\storage\handler.py", line 35, in __getitem__
+    return self._storages[alias]
+           ~~~~~~~~~~~~~~^^^^^^^
+KeyError: 'staticfiles'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\CS50\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\CS50\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\core\handlers\base.py", line 220, in _get_response
+    response = response.render()
+               ^^^^^^^^^^^^^^^^^
+  File "C:\Users\CS50\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\template\response.py", line 114, in render
+    self.content = self.rendered_content
+                   ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\CS50\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\template\response.py", line 92, in rendered_content
+    return template.render(context, self._request)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\CS50\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\template\backends\django.py", line 61, in render
+    return self.template.render(context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\CS50\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\template\base.py", line 175, in render
+    return self._render(context)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\CS50\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\template\base.py", line 167, in _render
+    return self.nodelist.render(context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\CS50\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\template\base.py", line 1005, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\CS50\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\template\base.py", line 1005, in <listcomp>
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\CS50\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\template\base.py", line 966, in render_annotated
+    return self.render(context)
+           ^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\CS50\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\template\loader_tags.py", line 157, in render
+    return compiled_parent._render(context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\CS50\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\template\base.py", line 167, in _render
+    return self.nodelist.render(context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\CS50\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\template\base.py", line 1005, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\CS50\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\template\base.py", line 1005, in <listcomp>
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\CS50\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\template\base.py", line 966, in render_annotated
+    return self.render(context)
+           ^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\CS50\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\template\loader_tags.py", line 157, in render
+    return compiled_parent._render(context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\CS50\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\template\base.py", line 167, in _render
+    return self.nodelist.render(context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\CS50\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\template\base.py", line 1005, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\CS50\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\template\base.py", line 1005, in <listcomp>
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\CS50\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\template\base.py", line 966, in render_annotated
+    return self.render(context)
+           ^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\CS50\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\template\loader_tags.py", line 63, in render
+    result = block.nodelist.render(context)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\CS50\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\template\base.py", line 1005, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\CS50\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\template\base.py", line 1005, in <listcomp>
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\CS50\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\template\base.py", line 966, in render_annotated
+    return self.render(context)
+           ^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\CS50\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\templatetags\static.py", line 116, in render
+    url = self.url(context)
+          ^^^^^^^^^^^^^^^^^
+  File "C:\Users\CS50\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\templatetags\static.py", line 113, in url
+    return self.handle_simple(path)
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\CS50\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\templatetags\static.py", line 129, in handle_simple
+    return staticfiles_storage.url(path)
+           ^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\CS50\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\utils\functional.py", line 266, in inner
+    self._setup()
+  File "C:\Users\CS50\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\contrib\staticfiles\storage.py", line 537, in _setup
+    self._wrapped = storages[STATICFILES_STORAGE_ALIAS]
+                    ~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\CS50\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\core\files\storage\handler.py", line 43, in __getitem__
+    storage = self.create_storage(params)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\CS50\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\core\files\storage\handler.py", line 55, in create_storage
+    return storage_cls(**options)
+           ^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\CS50\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\contrib\staticfiles\storage.py", line 29, in __init__
+    check_settings(base_url)
+  File "C:\Users\CS50\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\contrib\staticfiles\utils.py", line 49, in check_settings
+    raise ImproperlyConfigured(
+django.core.exceptions.ImproperlyConfigured: You're using the staticfiles app without having set the required STATIC_URL setting.
+ERROR 2026-05-10 11:58:48,964 basehttp "GET /admin/login/?next=/admin/ HTTP/1.1" 500 145
+ERROR 2026-05-10 12:01:06,778 log Internal Server Error: /admin/login/
+Traceback (most recent call last):
+  File "C:\Users\CS50\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\core\files\storage\handler.py", line 35, in __getitem__
+    return self._storages[alias]
+           ~~~~~~~~~~~~~~^^^^^^^
+KeyError: 'staticfiles'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\CS50\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\CS50\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\core\handlers\base.py", line 220, in _get_response
+    response = response.render()
+               ^^^^^^^^^^^^^^^^^
+  File "C:\Users\CS50\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\template\response.py", line 114, in render
+    self.content = self.rendered_content
+                   ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\CS50\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\template\response.py", line 92, in rendered_content
+    return template.render(context, self._request)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\CS50\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\template\backends\django.py", line 61, in render
+    return self.template.render(context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\CS50\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\template\base.py", line 175, in render
+    return self._render(context)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\CS50\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\template\base.py", line 167, in _render
+    return self.nodelist.render(context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\CS50\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\template\base.py", line 1005, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\CS50\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\template\base.py", line 1005, in <listcomp>
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\CS50\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\template\base.py", line 966, in render_annotated
+    return self.render(context)
+           ^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\CS50\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\template\loader_tags.py", line 157, in render
+    return compiled_parent._render(context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\CS50\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\template\base.py", line 167, in _render
+    return self.nodelist.render(context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\CS50\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\template\base.py", line 1005, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\CS50\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\template\base.py", line 1005, in <listcomp>
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\CS50\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\template\base.py", line 966, in render_annotated
+    return self.render(context)
+           ^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\CS50\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\template\loader_tags.py", line 157, in render
+    return compiled_parent._render(context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\CS50\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\template\base.py", line 167, in _render
+    return self.nodelist.render(context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\CS50\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\template\base.py", line 1005, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\CS50\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\template\base.py", line 1005, in <listcomp>
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\CS50\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\template\base.py", line 966, in render_annotated
+    return self.render(context)
+           ^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\CS50\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\template\loader_tags.py", line 63, in render
+    result = block.nodelist.render(context)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\CS50\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\template\base.py", line 1005, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\CS50\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\template\base.py", line 1005, in <listcomp>
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\CS50\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\template\base.py", line 966, in render_annotated
+    return self.render(context)
+           ^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\CS50\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\templatetags\static.py", line 116, in render
+    url = self.url(context)
+          ^^^^^^^^^^^^^^^^^
+  File "C:\Users\CS50\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\templatetags\static.py", line 113, in url
+    return self.handle_simple(path)
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\CS50\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\templatetags\static.py", line 129, in handle_simple
+    return staticfiles_storage.url(path)
+           ^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\CS50\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\utils\functional.py", line 266, in inner
+    self._setup()
+  File "C:\Users\CS50\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\contrib\staticfiles\storage.py", line 537, in _setup
+    self._wrapped = storages[STATICFILES_STORAGE_ALIAS]
+                    ~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\CS50\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\core\files\storage\handler.py", line 43, in __getitem__
+    storage = self.create_storage(params)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\CS50\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\core\files\storage\handler.py", line 55, in create_storage
+    return storage_cls(**options)
+           ^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\CS50\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\contrib\staticfiles\storage.py", line 29, in __init__
+    check_settings(base_url)
+  File "C:\Users\CS50\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\contrib\staticfiles\utils.py", line 49, in check_settings
+    raise ImproperlyConfigured(
+django.core.exceptions.ImproperlyConfigured: You're using the staticfiles app without having set the required STATIC_URL setting.
+ERROR 2026-05-10 12:01:06,804 basehttp "GET /admin/login/?next=/admin/ HTTP/1.1" 500 145
+ERROR 2026-05-10 12:01:08,893 log Internal Server Error: /admin/login/
+Traceback (most recent call last):
+  File "C:\Users\CS50\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\core\files\storage\handler.py", line 35, in __getitem__
+    return self._storages[alias]
+           ~~~~~~~~~~~~~~^^^^^^^
+KeyError: 'staticfiles'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\CS50\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\CS50\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\core\handlers\base.py", line 220, in _get_response
+    response = response.render()
+               ^^^^^^^^^^^^^^^^^
+  File "C:\Users\CS50\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\template\response.py", line 114, in render
+    self.content = self.rendered_content
+                   ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\CS50\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\template\response.py", line 92, in rendered_content
+    return template.render(context, self._request)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\CS50\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\template\backends\django.py", line 61, in render
+    return self.template.render(context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\CS50\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\template\base.py", line 175, in render
+    return self._render(context)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\CS50\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\template\base.py", line 167, in _render
+    return self.nodelist.render(context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\CS50\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\template\base.py", line 1005, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\CS50\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\template\base.py", line 1005, in <listcomp>
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\CS50\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\template\base.py", line 966, in render_annotated
+    return self.render(context)
+           ^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\CS50\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\template\loader_tags.py", line 157, in render
+    return compiled_parent._render(context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\CS50\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\template\base.py", line 167, in _render
+    return self.nodelist.render(context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\CS50\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\template\base.py", line 1005, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\CS50\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\template\base.py", line 1005, in <listcomp>
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\CS50\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\template\base.py", line 966, in render_annotated
+    return self.render(context)
+           ^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\CS50\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\template\loader_tags.py", line 157, in render
+    return compiled_parent._render(context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\CS50\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\template\base.py", line 167, in _render
+    return self.nodelist.render(context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\CS50\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\template\base.py", line 1005, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\CS50\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\template\base.py", line 1005, in <listcomp>
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\CS50\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\template\base.py", line 966, in render_annotated
+    return self.render(context)
+           ^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\CS50\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\template\loader_tags.py", line 63, in render
+    result = block.nodelist.render(context)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\CS50\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\template\base.py", line 1005, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\CS50\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\template\base.py", line 1005, in <listcomp>
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\CS50\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\template\base.py", line 966, in render_annotated
+    return self.render(context)
+           ^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\CS50\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\templatetags\static.py", line 116, in render
+    url = self.url(context)
+          ^^^^^^^^^^^^^^^^^
+  File "C:\Users\CS50\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\templatetags\static.py", line 113, in url
+    return self.handle_simple(path)
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\CS50\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\templatetags\static.py", line 129, in handle_simple
+    return staticfiles_storage.url(path)
+           ^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\CS50\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\utils\functional.py", line 266, in inner
+    self._setup()
+  File "C:\Users\CS50\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\contrib\staticfiles\storage.py", line 537, in _setup
+    self._wrapped = storages[STATICFILES_STORAGE_ALIAS]
+                    ~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\CS50\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\core\files\storage\handler.py", line 43, in __getitem__
+    storage = self.create_storage(params)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\CS50\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\core\files\storage\handler.py", line 55, in create_storage
+    return storage_cls(**options)
+           ^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\CS50\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\contrib\staticfiles\storage.py", line 29, in __init__
+    check_settings(base_url)
+  File "C:\Users\CS50\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\contrib\staticfiles\utils.py", line 49, in check_settings
+    raise ImproperlyConfigured(
+django.core.exceptions.ImproperlyConfigured: You're using the staticfiles app without having set the required STATIC_URL setting.
+ERROR 2026-05-10 12:01:09,388 basehttp "GET /admin/login/?next=/admin/ HTTP/1.1" 500 145
+ERROR 2026-05-10 12:02:18,086 log Internal Server Error: /admin/login/
+Traceback (most recent call last):
+  File "C:\Users\CS50\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\core\files\storage\handler.py", line 35, in __getitem__
+    return self._storages[alias]
+           ~~~~~~~~~~~~~~^^^^^^^
+KeyError: 'staticfiles'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\CS50\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\CS50\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\core\handlers\base.py", line 220, in _get_response
+    response = response.render()
+               ^^^^^^^^^^^^^^^^^
+  File "C:\Users\CS50\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\template\response.py", line 114, in render
+    self.content = self.rendered_content
+                   ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\CS50\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\template\response.py", line 92, in rendered_content
+    return template.render(context, self._request)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\CS50\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\template\backends\django.py", line 61, in render
+    return self.template.render(context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\CS50\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\template\base.py", line 175, in render
+    return self._render(context)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\CS50\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\template\base.py", line 167, in _render
+    return self.nodelist.render(context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\CS50\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\template\base.py", line 1005, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\CS50\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\template\base.py", line 1005, in <listcomp>
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\CS50\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\template\base.py", line 966, in render_annotated
+    return self.render(context)
+           ^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\CS50\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\template\loader_tags.py", line 157, in render
+    return compiled_parent._render(context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\CS50\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\template\base.py", line 167, in _render
+    return self.nodelist.render(context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\CS50\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\template\base.py", line 1005, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\CS50\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\template\base.py", line 1005, in <listcomp>
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\CS50\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\template\base.py", line 966, in render_annotated
+    return self.render(context)
+           ^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\CS50\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\template\loader_tags.py", line 157, in render
+    return compiled_parent._render(context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\CS50\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\template\base.py", line 167, in _render
+    return self.nodelist.render(context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\CS50\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\template\base.py", line 1005, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\CS50\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\template\base.py", line 1005, in <listcomp>
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\CS50\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\template\base.py", line 966, in render_annotated
+    return self.render(context)
+           ^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\CS50\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\template\loader_tags.py", line 63, in render
+    result = block.nodelist.render(context)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\CS50\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\template\base.py", line 1005, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\CS50\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\template\base.py", line 1005, in <listcomp>
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\CS50\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\template\base.py", line 966, in render_annotated
+    return self.render(context)
+           ^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\CS50\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\templatetags\static.py", line 116, in render
+    url = self.url(context)
+          ^^^^^^^^^^^^^^^^^
+  File "C:\Users\CS50\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\templatetags\static.py", line 113, in url
+    return self.handle_simple(path)
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\CS50\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\templatetags\static.py", line 129, in handle_simple
+    return staticfiles_storage.url(path)
+           ^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\CS50\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\utils\functional.py", line 266, in inner
+    self._setup()
+  File "C:\Users\CS50\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\contrib\staticfiles\storage.py", line 537, in _setup
+    self._wrapped = storages[STATICFILES_STORAGE_ALIAS]
+                    ~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\CS50\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\core\files\storage\handler.py", line 43, in __getitem__
+    storage = self.create_storage(params)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\CS50\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\core\files\storage\handler.py", line 55, in create_storage
+    return storage_cls(**options)
+           ^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\CS50\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\contrib\staticfiles\storage.py", line 29, in __init__
+    check_settings(base_url)
+  File "C:\Users\CS50\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\contrib\staticfiles\utils.py", line 49, in check_settings
+    raise ImproperlyConfigured(
+django.core.exceptions.ImproperlyConfigured: You're using the staticfiles app without having set the required STATIC_URL setting.
+ERROR 2026-05-10 12:02:18,125 basehttp "GET /admin/login/?next=/admin/ HTTP/1.1" 500 145
+WARNING 2026-05-10 13:32:58,657 log Not Found: /
+WARNING 2026-05-10 13:32:58,658 basehttp "GET / HTTP/1.1" 404 179
+WARNING 2026-05-10 13:34:05,583 log Not Found: /
+WARNING 2026-05-10 13:34:05,585 basehttp "GET / HTTP/1.1" 404 179
+WARNING 2026-05-10 13:36:58,139 log Not Found: /
+WARNING 2026-05-10 13:36:58,193 basehttp "GET / HTTP/1.1" 404 179
+ERROR 2026-06-14 09:27:32,859 basehttp You're accessing the development server over HTTPS, but it only supports HTTP.
+ERROR 2026-06-14 09:27:34,620 basehttp You're accessing the development server over HTTPS, but it only supports HTTP.
+ERROR 2026-06-14 09:28:00,276 basehttp You're accessing the development server over HTTPS, but it only supports HTTP.
+ERROR 2026-06-14 09:28:00,476 basehttp You're accessing the development server over HTTPS, but it only supports HTTP.
+ERROR 2026-06-14 09:28:00,576 basehttp You're accessing the development server over HTTPS, but it only supports HTTP.
+ERROR 2026-06-14 09:28:00,849 basehttp You're accessing the development server over HTTPS, but it only supports HTTP.
+ERROR 2026-06-14 09:28:14,404 basehttp You're accessing the development server over HTTPS, but it only supports HTTP.
+ERROR 2026-06-14 09:28:14,521 basehttp You're accessing the development server over HTTPS, but it only supports HTTP.
+ERROR 2026-06-14 09:28:14,652 basehttp You're accessing the development server over HTTPS, but it only supports HTTP.
+ERROR 2026-06-14 09:28:14,869 basehttp You're accessing the development server over HTTPS, but it only supports HTTP.
+ERROR 2026-06-14 09:28:19,697 basehttp You're accessing the development server over HTTPS, but it only supports HTTP.
+ERROR 2026-06-14 09:28:19,711 basehttp You're accessing the development server over HTTPS, but it only supports HTTP.
+ERROR 2026-06-14 09:28:19,855 basehttp You're accessing the development server over HTTPS, but it only supports HTTP.
+ERROR 2026-06-14 09:28:19,942 basehttp You're accessing the development server over HTTPS, but it only supports HTTP.
+ERROR 2026-06-14 09:28:23,004 basehttp You're accessing the development server over HTTPS, but it only supports HTTP.
+ERROR 2026-06-14 09:28:23,287 basehttp You're accessing the development server over HTTPS, but it only supports HTTP.
+ERROR 2026-06-14 09:28:23,371 basehttp You're accessing the development server over HTTPS, but it only supports HTTP.
+ERROR 2026-06-14 09:28:23,466 basehttp You're accessing the development server over HTTPS, but it only supports HTTP.
+ERROR 2026-06-14 09:28:57,225 basehttp You're accessing the development server over HTTPS, but it only supports HTTP.
+ERROR 2026-06-14 09:28:57,483 basehttp You're accessing the development server over HTTPS, but it only supports HTTP.
+ERROR 2026-06-14 09:29:13,313 basehttp You're accessing the development server over HTTPS, but it only supports HTTP.
+ERROR 2026-06-14 09:29:13,355 basehttp You're accessing the development server over HTTPS, but it only supports HTTP.
+ERROR 2026-06-14 09:29:13,360 basehttp You're accessing the development server over HTTPS, but it only supports HTTP.
+ERROR 2026-06-14 09:29:13,362 basehttp You're accessing the development server over HTTPS, but it only supports HTTP.
+ERROR 2026-06-14 09:29:21,700 basehttp You're accessing the development server over HTTPS, but it only supports HTTP.
+ERROR 2026-06-14 09:29:21,714 basehttp You're accessing the development server over HTTPS, but it only supports HTTP.
+ERROR 2026-06-14 09:32:42,834 basehttp You're accessing the development server over HTTPS, but it only supports HTTP.
+ERROR 2026-06-14 09:32:42,893 basehttp You're accessing the development server over HTTPS, but it only supports HTTP.
+ERROR 2026-06-14 09:32:56,894 basehttp You're accessing the development server over HTTPS, but it only supports HTTP.
+ERROR 2026-06-14 09:32:57,137 basehttp You're accessing the development server over HTTPS, but it only supports HTTP.
+ERROR 2026-06-14 09:35:40,396 basehttp You're accessing the development server over HTTPS, but it only supports HTTP.
+ERROR 2026-06-14 09:35:40,460 basehttp You're accessing the development server over HTTPS, but it only supports HTTP.
+ERROR 2026-06-14 09:35:40,525 basehttp You're accessing the development server over HTTPS, but it only supports HTTP.
+ERROR 2026-06-14 09:35:40,527 basehttp You're accessing the development server over HTTPS, but it only supports HTTP.
+ERROR 2026-06-14 09:35:51,708 basehttp You're accessing the development server over HTTPS, but it only supports HTTP.
+ERROR 2026-06-14 09:35:51,709 basehttp You're accessing the development server over HTTPS, but it only supports HTTP.
+ERROR 2026-06-14 09:35:51,721 basehttp You're accessing the development server over HTTPS, but it only supports HTTP.
+ERROR 2026-06-14 09:35:51,811 basehttp You're accessing the development server over HTTPS, but it only supports HTTP.
+ERROR 2026-06-14 09:36:50,634 basehttp You're accessing the development server over HTTPS, but it only supports HTTP.
+ERROR 2026-06-14 09:36:50,907 basehttp You're accessing the development server over HTTPS, but it only supports HTTP.
+ERROR 2026-06-14 09:37:14,738 basehttp You're accessing the development server over HTTPS, but it only supports HTTP.
+ERROR 2026-06-14 09:37:14,751 basehttp You're accessing the development server over HTTPS, but it only supports HTTP.
+ERROR 2026-06-14 09:37:14,765 basehttp You're accessing the development server over HTTPS, but it only supports HTTP.
+ERROR 2026-06-14 09:37:14,863 basehttp You're accessing the development server over HTTPS, but it only supports HTTP.
+ERROR 2026-06-14 09:37:31,410 basehttp You're accessing the development server over HTTPS, but it only supports HTTP.
+ERROR 2026-06-14 09:37:31,686 basehttp You're accessing the development server over HTTPS, but it only supports HTTP.
+ERROR 2026-06-14 09:38:27,069 basehttp You're accessing the development server over HTTPS, but it only supports HTTP.
+ERROR 2026-06-14 09:38:27,229 basehttp You're accessing the development server over HTTPS, but it only supports HTTP.
+ERROR 2026-06-14 10:05:15,871 basehttp You're accessing the development server over HTTPS, but it only supports HTTP.
+ERROR 2026-06-14 10:05:16,718 basehttp You're accessing the development server over HTTPS, but it only supports HTTP.
+ERROR 2026-06-14 11:58:40,243 basehttp You're accessing the development server over HTTPS, but it only supports HTTP.
+ERROR 2026-06-14 11:58:40,264 basehttp You're accessing the development server over HTTPS, but it only supports HTTP.
+ERROR 2026-06-14 11:59:40,366 basehttp You're accessing the development server over HTTPS, but it only supports HTTP.
+ERROR 2026-06-14 11:59:40,986 basehttp You're accessing the development server over HTTPS, but it only supports HTTP.
+ERROR 2026-06-14 11:59:51,870 basehttp You're accessing the development server over HTTPS, but it only supports HTTP.
+ERROR 2026-06-14 11:59:52,063 basehttp You're accessing the development server over HTTPS, but it only supports HTTP.
+ERROR 2026-06-14 12:01:29,824 basehttp You're accessing the development server over HTTPS, but it only supports HTTP.
+ERROR 2026-06-14 12:01:29,986 basehttp You're accessing the development server over HTTPS, but it only supports HTTP.
+ERROR 2026-06-14 12:01:33,311 basehttp You're accessing the development server over HTTPS, but it only supports HTTP.
+ERROR 2026-06-14 12:01:33,455 basehttp You're accessing the development server over HTTPS, but it only supports HTTP.
+ERROR 2026-06-14 12:01:34,751 basehttp You're accessing the development server over HTTPS, but it only supports HTTP.
+ERROR 2026-06-14 12:01:34,804 basehttp You're accessing the development server over HTTPS, but it only supports HTTP.
+ERROR 2026-06-14 12:09:51,982 basehttp You're accessing the development server over HTTPS, but it only supports HTTP.
+ERROR 2026-06-14 12:09:56,272 basehttp You're accessing the development server over HTTPS, but it only supports HTTP.
+ERROR 2026-06-14 12:39:35,380 basehttp You're accessing the development server over HTTPS, but it only supports HTTP.
+ERROR 2026-06-14 12:39:36,347 basehttp You're accessing the development server over HTTPS, but it only supports HTTP.
+ERROR 2026-06-14 12:52:21,557 basehttp You're accessing the development server over HTTPS, but it only supports HTTP.
+ERROR 2026-06-14 12:52:21,948 basehttp You're accessing the development server over HTTPS, but it only supports HTTP.
+ERROR 2026-06-14 12:52:21,948 basehttp You're accessing the development server over HTTPS, but it only supports HTTP.
+ERROR 2026-06-14 12:52:22,165 basehttp You're accessing the development server over HTTPS, but it only supports HTTP.
+ERROR 2026-06-14 12:52:22,609 basehttp You're accessing the development server over HTTPS, but it only supports HTTP.
+ERROR 2026-06-14 12:52:22,611 basehttp You're accessing the development server over HTTPS, but it only supports HTTP.
+ERROR 2026-06-14 12:52:22,621 basehttp You're accessing the development server over HTTPS, but it only supports HTTP.
+ERROR 2026-06-14 12:52:22,691 basehttp You're accessing the development server over HTTPS, but it only supports HTTP.
+ERROR 2026-06-14 12:52:30,964 basehttp You're accessing the development server over HTTPS, but it only supports HTTP.
+ERROR 2026-06-14 12:52:30,971 basehttp You're accessing the development server over HTTPS, but it only supports HTTP.
+ERROR 2026-06-14 12:52:30,979 basehttp You're accessing the development server over HTTPS, but it only supports HTTP.
+ERROR 2026-06-14 12:52:31,063 basehttp You're accessing the development server over HTTPS, but it only supports HTTP.
+ERROR 2026-06-14 12:52:31,464 basehttp You're accessing the development server over HTTPS, but it only supports HTTP.
+ERROR 2026-06-14 12:52:31,468 basehttp You're accessing the development server over HTTPS, but it only supports HTTP.
+ERROR 2026-06-14 12:52:31,554 basehttp You're accessing the development server over HTTPS, but it only supports HTTP.
+ERROR 2026-06-14 12:52:31,560 basehttp You're accessing the development server over HTTPS, but it only supports HTTP.
+ERROR 2026-06-14 12:52:31,651 basehttp You're accessing the development server over HTTPS, but it only supports HTTP.
+ERROR 2026-06-14 12:52:31,659 basehttp You're accessing the development server over HTTPS, but it only supports HTTP.
+ERROR 2026-06-14 16:38:06,245 basehttp You're accessing the development server over HTTPS, but it only supports HTTP.
+ERROR 2026-06-14 16:38:06,680 basehttp You're accessing the development server over HTTPS, but it only supports HTTP.
+ERROR 2026-06-14 16:38:07,677 basehttp You're accessing the development server over HTTPS, but it only supports HTTP.
+ERROR 2026-06-14 16:38:07,749 basehttp You're accessing the development server over HTTPS, but it only supports HTTP.
+ERROR 2026-06-14 16:38:07,767 basehttp You're accessing the development server over HTTPS, but it only supports HTTP.
+ERROR 2026-06-14 16:38:07,782 basehttp You're accessing the development server over HTTPS, but it only supports HTTP.
+ERROR 2026-06-14 16:39:39,447 basehttp You're accessing the development server over HTTPS, but it only supports HTTP.
+ERROR 2026-06-14 16:39:39,450 basehttp You're accessing the development server over HTTPS, but it only supports HTTP.
+ERROR 2026-06-14 16:39:39,483 basehttp You're accessing the development server over HTTPS, but it only supports HTTP.
+ERROR 2026-06-14 16:39:39,486 basehttp You're accessing the development server over HTTPS, but it only supports HTTP.
+ERROR 2026-06-14 16:39:39,491 basehttp You're accessing the development server over HTTPS, but it only supports HTTP.
+ERROR 2026-06-14 16:39:39,493 basehttp You're accessing the development server over HTTPS, but it only supports HTTP.
+ERROR 2026-06-14 16:41:29,944 basehttp You're accessing the development server over HTTPS, but it only supports HTTP.
+ERROR 2026-06-14 16:41:29,949 basehttp You're accessing the development server over HTTPS, but it only supports HTTP.
+ERROR 2026-06-14 16:41:30,125 basehttp You're accessing the development server over HTTPS, but it only supports HTTP.
+ERROR 2026-06-14 16:41:30,135 basehttp You're accessing the development server over HTTPS, but it only supports HTTP.
+ERROR 2026-06-14 16:41:56,011 basehttp You're accessing the development server over HTTPS, but it only supports HTTP.
+ERROR 2026-06-14 16:41:56,071 basehttp You're accessing the development server over HTTPS, but it only supports HTTP.
+ERROR 2026-06-14 16:41:56,317 basehttp You're accessing the development server over HTTPS, but it only supports HTTP.
+ERROR 2026-06-14 16:41:56,477 basehttp You're accessing the development server over HTTPS, but it only supports HTTP.
+ERROR 2026-06-14 16:44:21,413 basehttp You're accessing the development server over HTTPS, but it only supports HTTP.
+ERROR 2026-06-14 16:44:21,419 basehttp You're accessing the development server over HTTPS, but it only supports HTTP.
+ERROR 2026-06-14 16:44:21,431 basehttp You're accessing the development server over HTTPS, but it only supports HTTP.
+ERROR 2026-06-14 16:44:21,536 basehttp You're accessing the development server over HTTPS, but it only supports HTTP.
+ERROR 2026-06-14 16:46:48,778 basehttp You're accessing the development server over HTTPS, but it only supports HTTP.
+ERROR 2026-06-14 16:46:48,811 basehttp You're accessing the development server over HTTPS, but it only supports HTTP.
+ERROR 2026-06-14 16:46:48,950 basehttp You're accessing the development server over HTTPS, but it only supports HTTP.
+ERROR 2026-06-14 16:46:49,123 basehttp You're accessing the development server over HTTPS, but it only supports HTTP.
+ERROR 2026-06-14 16:48:44,015 basehttp You're accessing the development server over HTTPS, but it only supports HTTP.
+ERROR 2026-06-14 16:48:44,041 basehttp You're accessing the development server over HTTPS, but it only supports HTTP.
+ERROR 2026-06-14 16:48:44,147 basehttp You're accessing the development server over HTTPS, but it only supports HTTP.
+ERROR 2026-06-14 16:48:44,152 basehttp You're accessing the development server over HTTPS, but it only supports HTTP.
+ERROR 2026-06-14 16:49:49,922 basehttp You're accessing the development server over HTTPS, but it only supports HTTP.
+ERROR 2026-06-14 16:49:49,924 basehttp You're accessing the development server over HTTPS, but it only supports HTTP.
+ERROR 2026-06-14 16:49:50,011 basehttp You're accessing the development server over HTTPS, but it only supports HTTP.
+ERROR 2026-06-14 16:49:50,018 basehttp You're accessing the development server over HTTPS, but it only supports HTTP.
+ERROR 2026-06-14 16:53:10,247 basehttp You're accessing the development server over HTTPS, but it only supports HTTP.
+ERROR 2026-06-14 16:53:10,887 basehttp You're accessing the development server over HTTPS, but it only supports HTTP.
+ERROR 2026-06-14 16:54:07,765 basehttp You're accessing the development server over HTTPS, but it only supports HTTP.
+ERROR 2026-06-14 16:54:07,777 basehttp You're accessing the development server over HTTPS, but it only supports HTTP.
+ERROR 2026-06-14 16:54:07,867 basehttp You're accessing the development server over HTTPS, but it only supports HTTP.
+ERROR 2026-06-14 16:54:07,916 basehttp You're accessing the development server over HTTPS, but it only supports HTTP.
+ERROR 2026-06-14 16:54:54,976 basehttp You're accessing the development server over HTTPS, but it only supports HTTP.
+ERROR 2026-06-14 16:54:54,984 basehttp You're accessing the development server over HTTPS, but it only supports HTTP.
+ERROR 2026-06-14 16:55:17,977 basehttp You're accessing the development server over HTTPS, but it only supports HTTP.
+ERROR 2026-06-14 16:55:17,983 basehttp You're accessing the development server over HTTPS, but it only supports HTTP.
+ERROR 2026-06-14 16:55:18,168 basehttp You're accessing the development server over HTTPS, but it only supports HTTP.
+ERROR 2026-06-14 16:55:18,291 basehttp You're accessing the development server over HTTPS, but it only supports HTTP.
+ERROR 2026-06-14 17:06:21,561 basehttp You're accessing the development server over HTTPS, but it only supports HTTP.
+ERROR 2026-06-14 17:06:22,284 basehttp You're accessing the development server over HTTPS, but it only supports HTTP.
+ERROR 2026-06-14 17:06:23,130 basehttp You're accessing the development server over HTTPS, but it only supports HTTP.
+ERROR 2026-06-14 17:06:23,130 basehttp You're accessing the development server over HTTPS, but it only supports HTTP.
+ERROR 2026-06-14 17:06:23,217 basehttp You're accessing the development server over HTTPS, but it only supports HTTP.
+ERROR 2026-06-14 17:06:23,218 basehttp You're accessing the development server over HTTPS, but it only supports HTTP.
+ERROR 2026-06-14 17:07:41,307 basehttp You're accessing the development server over HTTPS, but it only supports HTTP.
+ERROR 2026-06-14 17:07:41,312 basehttp You're accessing the development server over HTTPS, but it only supports HTTP.
+ERROR 2026-06-14 17:07:41,567 basehttp You're accessing the development server over HTTPS, but it only supports HTTP.
+ERROR 2026-06-14 17:07:41,568 basehttp You're accessing the development server over HTTPS, but it only supports HTTP.
+ERROR 2026-06-14 17:07:41,683 basehttp You're accessing the development server over HTTPS, but it only supports HTTP.
+ERROR 2026-06-14 17:07:41,761 basehttp You're accessing the development server over HTTPS, but it only supports HTTP.
+ERROR 2026-06-14 17:35:24,136 basehttp You're accessing the development server over HTTPS, but it only supports HTTP.
+ERROR 2026-06-14 17:35:24,156 basehttp You're accessing the development server over HTTPS, but it only supports HTTP.
+ERROR 2026-06-14 17:35:24,543 basehttp You're accessing the development server over HTTPS, but it only supports HTTP.
+ERROR 2026-06-14 17:35:24,546 basehttp You're accessing the development server over HTTPS, but it only supports HTTP.
+ERROR 2026-06-14 17:35:33,124 basehttp You're accessing the development server over HTTPS, but it only supports HTTP.
+ERROR 2026-06-14 17:35:33,392 basehttp You're accessing the development server over HTTPS, but it only supports HTTP.
+ERROR 2026-06-14 17:35:33,437 basehttp You're accessing the development server over HTTPS, but it only supports HTTP.
+ERROR 2026-06-14 17:35:33,709 basehttp You're accessing the development server over HTTPS, but it only supports HTTP.
+ERROR 2026-06-14 17:36:16,906 basehttp You're accessing the development server over HTTPS, but it only supports HTTP.
+ERROR 2026-06-14 17:36:16,910 basehttp You're accessing the development server over HTTPS, but it only supports HTTP.
+ERROR 2026-06-14 17:45:46,973 basehttp You're accessing the development server over HTTPS, but it only supports HTTP.
+ERROR 2026-06-14 17:45:46,974 basehttp You're accessing the development server over HTTPS, but it only supports HTTP.
+ERROR 2026-06-14 17:45:47,169 basehttp You're accessing the development server over HTTPS, but it only supports HTTP.
+ERROR 2026-06-14 17:45:47,171 basehttp You're accessing the development server over HTTPS, but it only supports HTTP.
+ERROR 2026-06-14 17:46:42,326 basehttp You're accessing the development server over HTTPS, but it only supports HTTP.
+ERROR 2026-06-14 17:46:42,442 basehttp You're accessing the development server over HTTPS, but it only supports HTTP.
+ERROR 2026-06-14 17:55:30,191 log Internal Server Error: /
+Traceback (most recent call last):
+  File "C:\Users\CS50\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\db\backends\utils.py", line 89, in _execute
+    return self.cursor.execute(sql, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+psycopg2.errors.UndefinedTable: relation "django_session" does not exist
+LINE 1: SELECT 1 AS "a" FROM "django_session" WHERE "django_session"...
+                             ^
+
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\CS50\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\CS50\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\utils\deprecation.py", line 136, in __call__
+    response = self.process_response(request, response)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\CS50\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\contrib\sessions\middleware.py", line 59, in process_response
+    request.session.save()
+  File "C:\Users\CS50\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\contrib\sessions\backends\db.py", line 80, in save
+    return self.create()
+           ^^^^^^^^^^^^^
+  File "C:\Users\CS50\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\contrib\sessions\backends\db.py", line 50, in create
+    self._session_key = self._get_new_session_key()
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\CS50\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\contrib\sessions\backends\base.py", line 150, in _get_new_session_key
+    if not self.exists(session_key):
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\CS50\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\contrib\sessions\backends\db.py", line 46, in exists
+    return self.model.objects.filter(session_key=session_key).exists()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\CS50\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\db\models\query.py", line 1241, in exists
+    return self.query.has_results(using=self.db)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\CS50\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\db\models\sql\query.py", line 598, in has_results
+    return compiler.has_results()
+           ^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\CS50\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\db\models\sql\compiler.py", line 1530, in has_results
+    return bool(self.execute_sql(SINGLE))
+                ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\CS50\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\db\models\sql\compiler.py", line 1562, in execute_sql
+    cursor.execute(sql, params)
+  File "C:\Users\CS50\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\db\backends\utils.py", line 102, in execute
+    return super().execute(sql, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\CS50\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\db\backends\utils.py", line 67, in execute
+    return self._execute_with_wrappers(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\CS50\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\db\backends\utils.py", line 80, in _execute_with_wrappers
+    return executor(sql, params, many, context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\CS50\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\db\backends\utils.py", line 84, in _execute
+    with self.db.wrap_database_errors:
+  File "C:\Users\CS50\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\db\utils.py", line 91, in __exit__
+    raise dj_exc_value.with_traceback(traceback) from exc_value
+  File "C:\Users\CS50\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\db\backends\utils.py", line 89, in _execute
+    return self.cursor.execute(sql, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+django.db.utils.ProgrammingError: relation "django_session" does not exist
+LINE 1: SELECT 1 AS "a" FROM "django_session" WHERE "django_session"...
+                             ^
+
+ERROR 2026-06-14 17:55:30,448 basehttp "GET / HTTP/1.1" 500 140303
+ERROR 2026-06-14 17:55:35,406 log Internal Server Error: /favicon.ico
+Traceback (most recent call last):
+  File "C:\Users\CS50\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\db\backends\utils.py", line 89, in _execute
+    return self.cursor.execute(sql, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+psycopg2.errors.UndefinedTable: relation "django_session" does not exist
+LINE 1: SELECT 1 AS "a" FROM "django_session" WHERE "django_session"...
+                             ^
+
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\CS50\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\CS50\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\utils\deprecation.py", line 136, in __call__
+    response = self.process_response(request, response)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\CS50\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\contrib\sessions\middleware.py", line 59, in process_response
+    request.session.save()
+  File "C:\Users\CS50\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\contrib\sessions\backends\db.py", line 80, in save
+    return self.create()
+           ^^^^^^^^^^^^^
+  File "C:\Users\CS50\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\contrib\sessions\backends\db.py", line 50, in create
+    self._session_key = self._get_new_session_key()
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\CS50\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\contrib\sessions\backends\base.py", line 150, in _get_new_session_key
+    if not self.exists(session_key):
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\CS50\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\contrib\sessions\backends\db.py", line 46, in exists
+    return self.model.objects.filter(session_key=session_key).exists()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\CS50\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\db\models\query.py", line 1241, in exists
+    return self.query.has_results(using=self.db)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\CS50\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\db\models\sql\query.py", line 598, in has_results
+    return compiler.has_results()
+           ^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\CS50\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\db\models\sql\compiler.py", line 1530, in has_results
+    return bool(self.execute_sql(SINGLE))
+                ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\CS50\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\db\models\sql\compiler.py", line 1562, in execute_sql
+    cursor.execute(sql, params)
+  File "C:\Users\CS50\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\db\backends\utils.py", line 102, in execute
+    return super().execute(sql, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\CS50\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\db\backends\utils.py", line 67, in execute
+    return self._execute_with_wrappers(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\CS50\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\db\backends\utils.py", line 80, in _execute_with_wrappers
+    return executor(sql, params, many, context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\CS50\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\db\backends\utils.py", line 84, in _execute
+    with self.db.wrap_database_errors:
+  File "C:\Users\CS50\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\db\utils.py", line 91, in __exit__
+    raise dj_exc_value.with_traceback(traceback) from exc_value
+  File "C:\Users\CS50\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\db\backends\utils.py", line 89, in _execute
+    return self.cursor.execute(sql, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+django.db.utils.ProgrammingError: relation "django_session" does not exist
+LINE 1: SELECT 1 AS "a" FROM "django_session" WHERE "django_session"...
+                             ^
+
+ERROR 2026-06-14 17:55:35,518 basehttp "GET /favicon.ico HTTP/1.1" 500 140217
+ERROR 2026-06-15 22:37:04,479 basehttp You're accessing the development server over HTTPS, but it only supports HTTP.
+ERROR 2026-06-15 22:37:05,229 basehttp You're accessing the development server over HTTPS, but it only supports HTTP.
+WARNING 2026-06-15 22:38:24,167 log Not Found: /
+WARNING 2026-06-15 22:38:24,201 basehttp "GET / HTTP/1.1" 404 3257
+WARNING 2026-06-15 22:38:26,834 log Not Found: /favicon.ico
+WARNING 2026-06-15 22:38:26,837 basehttp "GET /favicon.ico HTTP/1.1" 404 3308
+WARNING 2026-06-15 22:42:13,707 log Not Found: /api/v1/dashboard
+WARNING 2026-06-15 22:42:13,760 basehttp "GET /api/v1/dashboard HTTP/1.1" 404 3323
+WARNING 2026-06-15 22:42:30,132 log Not Found: /api/v1/dashboard/
+WARNING 2026-06-15 22:42:30,133 basehttp "GET /api/v1/dashboard/ HTTP/1.1" 404 3602
+ERROR 2026-06-15 22:43:15,225 log Internal Server Error: /api/v1/services/
+Traceback (most recent call last):
+  File "C:\Users\CS50\AppData\Local\Programs\Python\Python311\Lib\site-packages\django_redis\cache.py", line 29, in _decorator
+    return method(self, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\CS50\AppData\Local\Programs\Python\Python311\Lib\site-packages\django_redis\cache.py", line 99, in _get
+    return self.client.get(key, default=default, version=version, client=client)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\CS50\AppData\Local\Programs\Python\Python311\Lib\site-packages\django_redis\client\default.py", line 260, in get
+    raise ConnectionInterrupted(connection=client) from e
+django_redis.exceptions.ConnectionInterrupted: Redis ConnectionError: Error 10061 connecting to 127.0.0.1:6379. No connection could be made because the target machine actively refused it.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\CS50\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\CS50\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\CS50\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\views\decorators\csrf.py", line 56, in wrapper_view
+    return view_func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\CS50\AppData\Local\Programs\Python\Python311\Lib\site-packages\rest_framework\viewsets.py", line 124, in view
+    return self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\CS50\AppData\Local\Programs\Python\Python311\Lib\site-packages\rest_framework\views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\CS50\AppData\Local\Programs\Python\Python311\Lib\site-packages\rest_framework\views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\Users\CS50\AppData\Local\Programs\Python\Python311\Lib\site-packages\rest_framework\views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "C:\Users\CS50\AppData\Local\Programs\Python\Python311\Lib\site-packages\rest_framework\views.py", line 497, in dispatch
+    self.initial(request, *args, **kwargs)
+  File "C:\Users\CS50\AppData\Local\Programs\Python\Python311\Lib\site-packages\rest_framework\views.py", line 416, in initial
+    self.check_throttles(request)
+  File "C:\Users\CS50\AppData\Local\Programs\Python\Python311\Lib\site-packages\rest_framework\views.py", line 359, in check_throttles
+    if not throttle.allow_request(request, self):
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\CS50\AppData\Local\Programs\Python\Python311\Lib\site-packages\rest_framework\throttling.py", line 123, in allow_request
+    self.history = self.cache.get(self.key, [])
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\CS50\AppData\Local\Programs\Python\Python311\Lib\site-packages\django_redis\cache.py", line 92, in get
+    value = self._get(key, default, version, client)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\CS50\AppData\Local\Programs\Python\Python311\Lib\site-packages\django_redis\cache.py", line 36, in _decorator
+    raise e.__cause__
+  File "C:\Users\CS50\AppData\Local\Programs\Python\Python311\Lib\site-packages\django_redis\client\default.py", line 258, in get
+    value = client.get(key)
+            ^^^^^^^^^^^^^^^
+  File "C:\Users\CS50\AppData\Local\Programs\Python\Python311\Lib\site-packages\redis\commands\core.py", line 1830, in get
+    return self.execute_command("GET", name)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\CS50\AppData\Local\Programs\Python\Python311\Lib\site-packages\redis\client.py", line 542, in execute_command
+    conn = self.connection or pool.get_connection(command_name, **options)
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\CS50\AppData\Local\Programs\Python\Python311\Lib\site-packages\redis\connection.py", line 1109, in get_connection
+    connection.connect()
+  File "C:\Users\CS50\AppData\Local\Programs\Python\Python311\Lib\site-packages\redis\connection.py", line 282, in connect
+    raise ConnectionError(self._error_message(e))
+redis.exceptions.ConnectionError: Error 10061 connecting to 127.0.0.1:6379. No connection could be made because the target machine actively refused it.
+ERROR 2026-06-15 22:43:15,313 basehttp "GET /api/v1/services/ HTTP/1.1" 500 154863
+ERROR 2026-06-15 22:59:51,949 basehttp You're accessing the development server over HTTPS, but it only supports HTTP.
+ERROR 2026-06-15 22:59:52,062 basehttp You're accessing the development server over HTTPS, but it only supports HTTP.
+ERROR 2026-06-15 23:00:09,245 basehttp You're accessing the development server over HTTPS, but it only supports HTTP.
+ERROR 2026-06-15 23:00:09,281 basehttp You're accessing the development server over HTTPS, but it only supports HTTP.
+ERROR 2026-06-15 23:00:23,410 basehttp You're accessing the development server over HTTPS, but it only supports HTTP.
+ERROR 2026-06-15 23:00:23,419 basehttp You're accessing the development server over HTTPS, but it only supports HTTP.
+ERROR 2026-06-15 23:02:29,875 basehttp You're accessing the development server over HTTPS, but it only supports HTTP.
+ERROR 2026-06-15 23:02:29,879 basehttp You're accessing the development server over HTTPS, but it only supports HTTP.
