@@ -1,19 +1,16 @@
-"""
-YoungRoots — Accounts Views
-"""
 from rest_framework import generics, status, permissions
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework_simplejwt.views import TokenObtainPairView
 from rest_framework_simplejwt.tokens import RefreshToken
-from django_ratelimit.decorators import ratelimit
-from django.utils.decorators import method_decorator
-from .models import User, AnonymousToken
+from django.utils import timezone
+from .models import User, AnonymousToken, UserRole
 from .serializers import (
     CustomTokenObtainPairSerializer, UserRegistrationSerializer,
-    UserProfileSerializer, AnonymousSessionSerializer, AdminUserSerializer
+    UserProfileSerializer, AnonymousSessionSerializer,
+    AdminUserListSerializer, AdminCreateUserSerializer, AdminUpdateUserSerializer,
 )
-from .permissions import IsAdminUser, IsSuperAdmin
+from .permissions import IsAdminUser, IsSuperAdmin, IsAdvocateOrAdmin, CanManageUsers
 
 
 class CustomTokenObtainPairView(TokenObtainPairView):
@@ -21,7 +18,6 @@ class CustomTokenObtainPairView(TokenObtainPairView):
 
 
 class RegisterView(generics.CreateAPIView):
-    """Register a new user with email/password."""
     permission_classes = [permissions.AllowAny]
     serializer_class   = UserRegistrationSerializer
 
@@ -39,13 +35,8 @@ class RegisterView(generics.CreateAPIView):
 
 
 class AnonymousSessionView(APIView):
-    """
-    Create an anonymous session — no email or personal data required.
-    Returns a token that expires in 24 hours.
-    """
     permission_classes = [permissions.AllowAny]
 
-    @method_decorator(ratelimit(key='ip', rate='20/h', method='POST', block=True))
     def post(self, request):
         session_key = getattr(request, 'anon_session_id', '')
         serializer  = AnonymousSessionSerializer()
@@ -54,7 +45,6 @@ class AnonymousSessionView(APIView):
 
 
 class UserProfileView(generics.RetrieveUpdateAPIView):
-    """Get or update the current user's profile."""
     serializer_class   = UserProfileSerializer
     permission_classes = [permissions.IsAuthenticated]
 
@@ -62,17 +52,101 @@ class UserProfileView(generics.RetrieveUpdateAPIView):
         return self.request.user
 
 
-class AdminUserListView(generics.ListCreateAPIView):
-    """Admin: list and create users."""
-    serializer_class   = AdminUserSerializer
-    permission_classes = [IsAdminUser]
-    queryset           = User.objects.all().order_by('-date_joined')
+# ── Admin User Management ─────────────────────────────────────────────────────
+
+class AdminUserListCreateView(generics.ListCreateAPIView):
+    """
+    GET  /api/v1/auth/users/       - List all users (admin+)
+    POST /api/v1/auth/users/       - Create admin/advocate (admin+)
+    """
+    permission_classes = [CanManageUsers]
     filterset_fields   = ['role', 'is_active', 'is_anonymous_user']
     search_fields      = ['email', 'display_name']
 
+    def get_queryset(self):
+        qs = User.objects.all().order_by('-date_joined')
+        # Advocates can see only non-admin users
+        if self.request.user.role == UserRole.ADMIN:
+            qs = qs.exclude(role=UserRole.SUPER_ADMIN)
+        return qs
+
+    def get_serializer_class(self):
+        if self.request.method == 'POST':
+            return AdminCreateUserSerializer
+        return AdminUserListSerializer
+
+    def get_serializer_context(self):
+        ctx = super().get_serializer_context()
+        ctx['request'] = self.request
+        return ctx
+
+    def create(self, request, *args, **kwargs):
+        serializer = self.get_serializer(data=request.data, context={'request': request})
+        serializer.is_valid(raise_exception=True)
+        user = serializer.save()
+        return Response({
+            'message': f'User {user.display_name or user.email} created with role {user.role}.',
+            'user': AdminUserListSerializer(user).data,
+        }, status=status.HTTP_201_CREATED)
+
 
 class AdminUserDetailView(generics.RetrieveUpdateDestroyAPIView):
-    """Admin: manage individual user."""
-    serializer_class   = AdminUserSerializer
-    permission_classes = [IsAdminUser]
-    queryset           = User.objects.all()
+    """
+    GET    /api/v1/auth/users/<id>/  - Get user detail
+    PATCH  /api/v1/auth/users/<id>/  - Update role / active status
+    DELETE /api/v1/auth/users/<id>/  - Deactivate user (super admin only)
+    """
+    permission_classes = [CanManageUsers]
+
+    def get_queryset(self):
+        if self.request.user.role == UserRole.SUPER_ADMIN:
+            return User.objects.all()
+        return User.objects.exclude(role__in=[UserRole.ADMIN, UserRole.SUPER_ADMIN])
+
+    def get_serializer_class(self):
+        if self.request.method in ['PUT', 'PATCH']:
+            return AdminUpdateUserSerializer
+        return AdminUserListSerializer
+
+    def get_serializer_context(self):
+        ctx = super().get_serializer_context()
+        ctx['request'] = self.request
+        return ctx
+
+    def destroy(self, request, *args, **kwargs):
+        """Soft-delete: deactivate instead of hard delete."""
+        if request.user.role != UserRole.SUPER_ADMIN:
+            return Response({'error': 'Only Super Admins can deactivate users.'},
+                            status=status.HTTP_403_FORBIDDEN)
+        user = self.get_object()
+        user.is_active = False
+        user.save(update_fields=['is_active'])
+        return Response({'message': f'User {user.email} deactivated.'}, status=status.HTTP_200_OK)
+
+
+class AdvocateDashboardView(APIView):
+    """Advocate-specific dashboard: their assigned cases."""
+    permission_classes = [IsAdvocateOrAdmin]
+
+    def get(self, request):
+        from apps.reports.models import Report
+        from apps.referrals.models import Referral
+        assigned = Report.objects.filter(assigned_to=request.user)
+        referrals = Referral.objects.filter(referred_by=request.user)
+        return Response({
+            'advocate': {
+                'name':             request.user.display_name or request.user.email,
+                'role':             request.user.role,
+            },
+            'stats': {
+                'assigned_cases':   assigned.count(),
+                'open_cases':       assigned.filter(status__in=['new', 'assigned', 'active']).count(),
+                'resolved_cases':   assigned.filter(status='resolved').count(),
+                'referrals_made':   referrals.count(),
+            },
+            'recent_cases': list(
+                assigned.order_by('-submitted_at')[:5].values(
+                    'case_id', 'report_type', 'status', 'urgency', 'submitted_at'
+                )
+            ),
+        })
