@@ -1,242 +1,262 @@
 """
 YoungRoots — AI Assistant
-Integrates Claude (Anthropic) for anonymous SRHR Q&A.
+Integrates Claude for anonymous SRHR Q&A via Web and WhatsApp.
 """
-import uuid
+import uuid, hashlib, logging, requests
 import anthropic
-import logging
 from django.conf import settings
-from django.utils import timezone
 from django.db import models
+from django.utils import timezone
 
 logger = logging.getLogger('apps')
 
-# ── MODELS ────────────────────────────────────────────────────────────────────
+# ── Models ────────────────────────────────────────────────────────────────────
 
 class ConversationSession(models.Model):
-    """
-    Tracks an anonymous AI chat session.
-    No personal data is stored — only the session token.
-    """
-    id              = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
-    session_token   = models.UUIDField(default=uuid.uuid4, unique=True, db_index=True)
-    language        = models.CharField(max_length=10, default='en')
-    started_at      = models.DateTimeField(auto_now_add=True)
-    last_active_at  = models.DateTimeField(auto_now=True)
-    message_count   = models.PositiveIntegerField(default=0)
-
-    # Aggregated topic tags (no raw messages stored long-term)
+    id             = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    session_token  = models.UUIDField(default=uuid.uuid4, unique=True, db_index=True)
+    channel        = models.CharField(max_length=20, default='web',
+                                      choices=[('web','Web'),('whatsapp','WhatsApp')])
+    language       = models.CharField(max_length=10, default='en')
+    started_at     = models.DateTimeField(auto_now_add=True)
+    last_active_at = models.DateTimeField(auto_now=True)
+    message_count  = models.PositiveIntegerField(default=0)
     topics_detected = models.JSONField(default=list)
+
+    # WhatsApp — store hashed phone number (privacy)
+    wa_phone_hash  = models.CharField(max_length=64, blank=True, db_index=True)
 
     class Meta:
         ordering = ['-started_at']
 
-    def __str__(self):
-        return f'Session {str(self.session_token)[:8]}'
+    @classmethod
+    def get_or_create_for_whatsapp(cls, phone_number: str):
+        phone_hash = hashlib.sha256(phone_number.encode()).hexdigest()
+        session, created = cls.objects.get_or_create(
+            wa_phone_hash=phone_hash,
+            defaults={'channel': 'whatsapp', 'language': 'en'}
+        )
+        return session
 
 
 class AIMessage(models.Model):
-    """
-    Individual AI conversation turn. Stored for session continuity only.
-    Auto-deleted after 24 hours via Celery task.
-    """
     class Role(models.TextChoices):
         USER      = 'user',      'User'
         ASSISTANT = 'assistant', 'Assistant'
 
-    id          = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
-    session     = models.ForeignKey(ConversationSession, on_delete=models.CASCADE, related_name='messages')
-    role        = models.CharField(max_length=15, choices=Role.choices)
-    content     = models.TextField()
-    created_at  = models.DateTimeField(auto_now_add=True)
-    topic_tags  = models.JSONField(default=list)
+    id         = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    session    = models.ForeignKey(ConversationSession, on_delete=models.CASCADE, related_name='messages')
+    role       = models.CharField(max_length=15, choices=Role.choices)
+    content    = models.TextField()
+    created_at = models.DateTimeField(auto_now_add=True)
+    topic_tags = models.JSONField(default=list)
 
     class Meta:
         ordering = ['created_at']
 
-    def __str__(self):
-        return f'{self.role}: {self.content[:60]}'
 
-
-# ── AI SERVICE ────────────────────────────────────────────────────────────────
-
-SYSTEM_PROMPT = """You are Yara, a warm, non-judgmental AI sexual and reproductive health and rights (SRHR) guide 
-designed specifically for young people in Africa aged 10–24.
-
-Your role:
-- Provide accurate, evidence-based sexual and reproductive health information
-- Answer questions about contraception, STIs, HIV/AIDS, menstruation, pregnancy, consent, GBV, and rights
-- Guide users to appropriate local services when needed
-- Support users experiencing mental health challenges related to sexual health
-- Respect cultural sensitivities while upholding health rights
-
-Communication style:
-- Use simple, clear language (Grade 8 reading level)  
-- Be empathetic, non-judgmental, and encouraging
-- Keep responses to 3–5 sentences unless more detail is requested
-- Use appropriate emojis sparingly to create warmth
-- Always validate the user's courage in asking
-
-Safety rules:
-- If someone indicates they are in immediate danger, prioritise directing them to emergency services
-- If someone mentions self-harm or suicidal ideation, provide crisis resources immediately  
-- Never diagnose medical conditions — encourage professional consultation
-- Never request personal identifying information
-- If asked about something outside SRHR, gently redirect to your area of expertise
-
-Languages: Respond in the same language the user writes in. Supported: English, Swahili, French, Portuguese."""
-
+# ── AI Engine ─────────────────────────────────────────────────────────────────
 
 TOPIC_KEYWORDS = {
-    'contraception':  ['contraception', 'condom', 'pill', 'implant', 'iud', 'family planning'],
-    'hiv_sti':        ['hiv', 'aids', 'sti', 'std', 'herpes', 'gonorrhoea', 'syphilis', 'testing'],
-    'gbv':            ['violence', 'abuse', 'rape', 'assault', 'gbv', 'forced', 'coercion'],
-    'mental_health':  ['anxiety', 'depression', 'stress', 'scared', 'worried', 'sad', 'help'],
-    'rights':         ['rights', 'law', 'legal', 'refused', 'denied', 'discrimination'],
-    'pregnancy':      ['pregnant', 'pregnancy', 'abortion', 'antenatal', 'birth'],
-    'relationships':  ['relationship', 'consent', 'partner', 'boyfriend', 'girlfriend'],
+    'contraception': ['contraception', 'condom', 'pill', 'implant', 'iud', 'family planning', 'morning after'],
+    'hiv_sti':       ['hiv', 'aids', 'sti', 'std', 'herpes', 'gonorrhoea', 'testing', 'pep', 'prep'],
+    'gbv':           ['violence', 'abuse', 'rape', 'assault', 'gbv', 'forced', 'coercion'],
+    'mental_health': ['anxiety', 'depression', 'stress', 'scared', 'worried', 'sad', 'help me'],
+    'rights':        ['rights', 'law', 'legal', 'refused', 'denied', 'discrimination'],
+    'pregnancy':     ['pregnant', 'pregnancy', 'abortion', 'antenatal', 'birth'],
+    'relationships': ['relationship', 'consent', 'partner', 'boyfriend', 'girlfriend'],
 }
 
 
 def detect_topics(text: str) -> list:
     text_lower = text.lower()
-    return [topic for topic, keywords in TOPIC_KEYWORDS.items()
-            if any(kw in text_lower for kw in keywords)]
-
-
-def build_conversation_history(session: ConversationSession) -> list:
-    """Build the messages list for the API call from the session history."""
-    return [
-        {'role': msg.role, 'content': msg.content}
-        for msg in session.messages.order_by('created_at')[-20:]  # Last 20 turns max
-    ]
+    return [topic for topic, kws in TOPIC_KEYWORDS.items() if any(k in text_lower for k in kws)]
 
 
 def get_ai_response(session: ConversationSession, user_message: str) -> str:
-    """
-    Call Claude API with full conversation context and return the AI response.
-    """
     client = anthropic.Anthropic(api_key=settings.ANTHROPIC_API_KEY)
-
-    # Build history + new message
-    history = build_conversation_history(session)
+    history = [
+        {'role': m.role, 'content': m.content}
+        for m in session.messages.order_by('created_at')[-20:]
+    ]
     history.append({'role': 'user', 'content': user_message})
-
     try:
         response = client.messages.create(
             model=settings.AI_MODEL,
             max_tokens=settings.AI_MAX_TOKENS,
-            system=SYSTEM_PROMPT,
+            system=settings.AI_SYSTEM_PROMPT,
             messages=history,
         )
         return response.content[0].text
     except anthropic.RateLimitError:
         logger.warning('Anthropic rate limit hit')
         return ("I'm receiving many questions right now. Please try again in a few minutes. "
-                "For urgent matters, contact your local health helpline. 💚")
-    except anthropic.APIError as e:
+                "For urgent help, contact a local health helpline. 💚")
+    except Exception as e:
         logger.error(f'Anthropic API error: {e}')
-        return ("I'm having technical difficulties. Please try again shortly. "
-                "Remember: if you need urgent help, reach out to a local service directly.")
+        return "I'm having a technical issue. Please try again shortly. 💚"
 
 
-# ── SERIALIZERS ───────────────────────────────────────────────────────────────
+def process_chat(session: ConversationSession, user_message: str) -> str:
+    """Core chat logic shared by web and WhatsApp channels."""
+    topics = detect_topics(user_message)
+    AIMessage.objects.create(session=session, role='user', content=user_message, topic_tags=topics)
+    ai_response = get_ai_response(session, user_message)
+    AIMessage.objects.create(session=session, role='assistant', content=ai_response)
+    session.message_count += 2
+    existing = set(session.topics_detected)
+    existing.update(topics)
+    session.topics_detected = list(existing)
+    session.save(update_fields=['message_count', 'topics_detected', 'last_active_at'])
+    return ai_response
+
+
+# ── WhatsApp Sending ──────────────────────────────────────────────────────────
+
+def send_whatsapp_message(to_number: str, message: str) -> bool:
+    """Send a WhatsApp message via Twilio or Meta Cloud API."""
+    provider = getattr(settings, 'WHATSAPP_PROVIDER', 'twilio')
+    try:
+        if provider == 'twilio':
+            return _send_via_twilio(to_number, message)
+        else:
+            return _send_via_meta(to_number, message)
+    except Exception as e:
+        logger.error(f'WhatsApp send error ({provider}): {e}')
+        return False
+
+
+def _send_via_twilio(to_number: str, message: str) -> bool:
+    from twilio.rest import Client
+    client = Client(settings.TWILIO_ACCOUNT_SID, settings.TWILIO_AUTH_TOKEN)
+    client.messages.create(
+        from_=settings.TWILIO_WHATSAPP_NUMBER,
+        to=f'whatsapp:{to_number}',
+        body=message,
+    )
+    return True
+
+
+def _send_via_meta(to_number: str, message: str) -> bool:
+    url = f'https://graph.facebook.com/v19.0/{settings.META_PHONE_NUMBER_ID}/messages'
+    headers = {
+        'Authorization': f'Bearer {settings.META_WHATSAPP_TOKEN}',
+        'Content-Type': 'application/json',
+    }
+    payload = {
+        'messaging_product': 'whatsapp',
+        'to': to_number.replace('+', '').replace(' ', ''),
+        'type': 'text',
+        'text': {'body': message},
+    }
+    resp = requests.post(url, json=payload, headers=headers, timeout=10)
+    return resp.status_code == 200
+
+
+# ── Serializers ───────────────────────────────────────────────────────────────
 
 from rest_framework import serializers
 
 
 class ChatMessageSerializer(serializers.Serializer):
-    message         = serializers.CharField(max_length=2000)
-    session_token   = serializers.UUIDField(required=False)
-    language        = serializers.ChoiceField(
-        choices=['en', 'sw', 'fr', 'pt', 'am', 'yo'], default='en'
-    )
+    message       = serializers.CharField(max_length=2000)
+    session_token = serializers.UUIDField(required=False)
+    language      = serializers.ChoiceField(choices=['en', 'sw', 'fr', 'pt', 'am', 'yo'], default='en')
 
 
-class ChatResponseSerializer(serializers.Serializer):
-    session_token   = serializers.UUIDField()
-    response        = serializers.CharField()
-    topics_detected = serializers.ListField(child=serializers.CharField())
-    message_count   = serializers.IntegerField()
-
-
-class ConversationSessionSerializer(serializers.ModelSerializer):
-    class Meta:
-        model  = ConversationSession
-        fields = ['session_token', 'language', 'started_at', 'last_active_at',
-                  'message_count', 'topics_detected']
-
-
-# ── VIEWS ─────────────────────────────────────────────────────────────────────
+# ── Views ─────────────────────────────────────────────────────────────────────
 
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import permissions, status
-from rest_framework.throttling import ScopedRateThrottle
-from django_ratelimit.decorators import ratelimit
-from django.utils.decorators import method_decorator
 
 
 class ChatView(APIView):
-    """
-    Anonymous AI chat endpoint.
-    Accepts a user message and returns Yara's response.
-    """
+    """Web chat endpoint."""
     permission_classes = [permissions.AllowAny]
-    throttle_scope     = 'ai_chat'
 
-    @method_decorator(ratelimit(key='ip', rate='30/h', method='POST', block=True))
     def post(self, request):
         serializer = ChatMessageSerializer(data=request.data)
         serializer.is_valid(raise_exception=True)
-
         data          = serializer.validated_data
         user_message  = data['message']
         session_token = data.get('session_token')
         language      = data.get('language', 'en')
 
-        # Get or create session
         if session_token:
             session, _ = ConversationSession.objects.get_or_create(
-                session_token=session_token,
-                defaults={'language': language}
+                session_token=session_token, defaults={'language': language, 'channel': 'web'}
             )
         else:
-            session = ConversationSession.objects.create(language=language)
+            session = ConversationSession.objects.create(language=language, channel='web')
 
-        # Detect topics for analytics (no PII)
-        topics = detect_topics(user_message)
-
-        # Store user message
-        AIMessage.objects.create(
-            session=session, role='user', content=user_message, topic_tags=topics
-        )
-
-        # Get AI response
-        ai_response = get_ai_response(session, user_message)
-
-        # Store AI response
-        AIMessage.objects.create(
-            session=session, role='assistant', content=ai_response
-        )
-
-        # Update session stats
-        session.message_count += 2
-        existing_topics = set(session.topics_detected)
-        existing_topics.update(topics)
-        session.topics_detected = list(existing_topics)
-        session.save(update_fields=['message_count', 'topics_detected', 'last_active_at'])
-
+        ai_response = process_chat(session, user_message)
         return Response({
             'session_token':   str(session.session_token),
             'response':        ai_response,
-            'topics_detected': topics,
+            'topics_detected': detect_topics(user_message),
             'message_count':   session.message_count,
         })
 
 
+class WhatsAppWebhookView(APIView):
+    """
+    WhatsApp webhook — handles both verification (GET) and incoming messages (POST).
+    Works with Twilio WhatsApp and Meta Cloud API.
+    """
+    permission_classes = [permissions.AllowAny]
+
+    # ── Meta verification handshake ───────────────────────────────────────────
+    def get(self, request):
+        mode      = request.query_params.get('hub.mode')
+        token     = request.query_params.get('hub.verify_token')
+        challenge = request.query_params.get('hub.challenge')
+        if mode == 'subscribe' and token == settings.META_VERIFY_TOKEN:
+            return Response(int(challenge), status=200)
+        return Response({'error': 'Verification failed'}, status=403)
+
+    # ── Incoming messages ─────────────────────────────────────────────────────
+    def post(self, request):
+        provider = getattr(settings, 'WHATSAPP_PROVIDER', 'twilio')
+        try:
+            if provider == 'twilio':
+                return self._handle_twilio(request)
+            else:
+                return self._handle_meta(request)
+        except Exception as e:
+            logger.error(f'WhatsApp webhook error: {e}')
+            return Response({'status': 'error'}, status=200)  # Always 200 to stop retries
+
+    def _handle_twilio(self, request):
+        from_number  = request.data.get('From', '').replace('whatsapp:', '')
+        user_message = request.data.get('Body', '').strip()
+        if not user_message or not from_number:
+            return Response({'status': 'ignored'}, status=200)
+        session     = ConversationSession.get_or_create_for_whatsapp(from_number)
+        ai_response = process_chat(session, user_message)
+        send_whatsapp_message(from_number, ai_response)
+        return Response({'status': 'ok'}, status=200)
+
+    def _handle_meta(self, request):
+        data  = request.data
+        entry = data.get('entry', [{}])[0]
+        change = entry.get('changes', [{}])[0]
+        value  = change.get('value', {})
+        messages = value.get('messages', [])
+        if not messages:
+            return Response({'status': 'ignored'}, status=200)
+        msg          = messages[0]
+        from_number  = msg.get('from', '')
+        user_message = msg.get('text', {}).get('body', '').strip()
+        if not user_message:
+            return Response({'status': 'ignored'}, status=200)
+        session     = ConversationSession.get_or_create_for_whatsapp(from_number)
+        ai_response = process_chat(session, user_message)
+        send_whatsapp_message(from_number, ai_response)
+        return Response({'status': 'ok'}, status=200)
+
+
 class ServiceRecommendationView(APIView):
-    """Ask AI to recommend services based on a described need."""
     permission_classes = [permissions.AllowAny]
 
     def post(self, request):
@@ -244,17 +264,12 @@ class ServiceRecommendationView(APIView):
         location = request.data.get('location', '')
         if not need:
             return Response({'error': 'Please describe your need.'}, status=400)
-
         client = anthropic.Anthropic(api_key=settings.ANTHROPIC_API_KEY)
-        prompt = (
-            f"A young person in {location or 'Africa'} needs: {need}. "
-            f"What type of SRHR service should they look for? "
-            f"Give a brief, actionable recommendation in 2-3 sentences. Be specific about service type."
-        )
+        prompt = (f"A young person in {location or 'Africa'} needs: {need}. "
+                  f"Recommend a specific type of SRHR service in 2 sentences.")
         response = client.messages.create(
-            model=settings.AI_MODEL,
-            max_tokens=300,
+            model=settings.AI_MODEL, max_tokens=300,
             messages=[{'role': 'user', 'content': prompt}],
-            system=SYSTEM_PROMPT,
+            system=settings.AI_SYSTEM_PROMPT,
         )
         return Response({'recommendation': response.content[0].text})
