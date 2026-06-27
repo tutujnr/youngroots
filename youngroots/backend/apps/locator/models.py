@@ -1,11 +1,15 @@
 """
-YoungRoots — Service Locator Models
-Stores verified youth-friendly SRHR service listings.
+YoungRoots — Service Locator
 """
 import uuid
 from django.db import models
-from django.contrib.gis.db import models as gis_models
-from django.utils import timezone
+from django.db.models import Avg
+from rest_framework import serializers, permissions, filters, status
+from rest_framework.decorators import action
+from rest_framework.response import Response
+from rest_framework.viewsets import ModelViewSet
+from django_filters.rest_framework import DjangoFilterBackend
+from apps.accounts.permissions import IsAdminUser
 
 
 class ServiceCategory(models.TextChoices):
@@ -31,81 +35,128 @@ class Country(models.Model):
 
     class Meta:
         verbose_name_plural = 'Countries'
-        ordering = ['name']
 
     def __str__(self):
         return self.name
 
 
 class Service(models.Model):
-    """
-    A verified youth-friendly SRHR service provider.
-    """
     id              = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     name            = models.CharField(max_length=200)
     category        = models.CharField(max_length=30, choices=ServiceCategory.choices)
     description     = models.TextField()
     short_desc      = models.CharField(max_length=200, blank=True)
-
-    # Location
     country         = models.ForeignKey(Country, on_delete=models.SET_NULL, null=True)
     region          = models.CharField(max_length=100, blank=True)
     address         = models.TextField(blank=True)
-    location        = gis_models.PointField(null=True, blank=True, srid=4326)
-
-    # Contact
+    latitude        = models.FloatField(null=True, blank=True)
+    longitude       = models.FloatField(null=True, blank=True)
     phone           = models.CharField(max_length=30, blank=True)
     email           = models.EmailField(blank=True)
     website         = models.URLField(blank=True)
     hotline         = models.CharField(max_length=30, blank=True)
-
-    # Operating details
-    operating_hours = models.JSONField(default=dict, help_text='{"mon": "8am-6pm", ...}')
+    operating_hours = models.JSONField(default=dict)
     is_free         = models.BooleanField(default=False)
     is_youth_friendly = models.BooleanField(default=True)
     serves_ages     = models.CharField(max_length=50, default='10-24')
     languages       = models.JSONField(default=list)
-
-    # Services offered
     services_offered = models.JSONField(default=list)
-
-    # Admin
     status          = models.CharField(max_length=20, choices=ServiceStatus.choices, default=ServiceStatus.PENDING)
-    verified_by     = models.ForeignKey(
-        'accounts.User', on_delete=models.SET_NULL, null=True, blank=True, related_name='verified_services'
-    )
-    verified_at     = models.DateTimeField(null=True, blank=True)
+    verified_by     = models.ForeignKey('accounts.User', on_delete=models.SET_NULL, null=True, blank=True, related_name='verified_services')
     created_at      = models.DateTimeField(auto_now_add=True)
     updated_at      = models.DateTimeField(auto_now=True)
 
     class Meta:
         ordering = ['name']
-        indexes = [
-            models.Index(fields=['category', 'status']),
-            models.Index(fields=['country', 'region']),
-        ]
 
     def __str__(self):
-        return f'{self.name} ({self.get_category_display()})'
+        return self.name
 
     def verify(self, admin_user):
-        self.status     = ServiceStatus.ACTIVE
+        self.status = ServiceStatus.ACTIVE
         self.verified_by = admin_user
-        self.verified_at = timezone.now()
-        self.save(update_fields=['status', 'verified_by', 'verified_at'])
+        self.save(update_fields=['status', 'verified_by'])
 
 
 class ServiceReview(models.Model):
-    """Anonymous youth rating of a service."""
     id          = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     service     = models.ForeignKey(Service, on_delete=models.CASCADE, related_name='reviews')
     rating      = models.PositiveSmallIntegerField(choices=[(i, i) for i in range(1, 6)])
     comment     = models.TextField(blank=True, max_length=500)
-    is_anonymous = models.BooleanField(default=True)
     created_at  = models.DateTimeField(auto_now_add=True)
 
     class Meta:
         ordering = ['-created_at']
 
-    def __str__(self):
-        return f'{self.service.name} — {self.rating}★'
+
+# ── Serializers ───────────────────────────────────────────────────────────────
+
+class ServiceReviewSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = ServiceReview
+        fields = ['id', 'rating', 'comment', 'created_at']
+
+
+class ServiceListSerializer(serializers.ModelSerializer):
+    category_display = serializers.CharField(source='get_category_display', read_only=True)
+    avg_rating = serializers.FloatField(read_only=True, default=None)
+
+    class Meta:
+        model = Service
+        fields = ['id', 'name', 'category', 'category_display', 'short_desc', 'region', 'address',
+                  'phone', 'hotline', 'is_free', 'is_youth_friendly', 'serves_ages',
+                  'operating_hours', 'languages', 'avg_rating', 'latitude', 'longitude']
+
+
+class ServiceDetailSerializer(serializers.ModelSerializer):
+    reviews = ServiceReviewSerializer(many=True, read_only=True)
+    category_display = serializers.CharField(source='get_category_display', read_only=True)
+
+    class Meta:
+        model = Service
+        fields = '__all__'
+
+
+# ── Views ─────────────────────────────────────────────────────────────────────
+
+class ServiceViewSet(ModelViewSet):
+    filter_backends = [DjangoFilterBackend, filters.SearchFilter]
+    filterset_fields = ['category', 'country', 'is_free', 'is_youth_friendly', 'status']
+    search_fields = ['name', 'description', 'region', 'address']
+
+    def get_queryset(self):
+        qs = Service.objects.annotate(avg_rating=Avg('reviews__rating'))
+        if not (self.request.user.is_authenticated and getattr(self.request.user, 'is_admin', False)):
+            qs = qs.filter(status='active')
+        return qs
+
+    def get_serializer_class(self):
+        if self.action == 'list':
+            return ServiceListSerializer
+        return ServiceDetailSerializer
+
+    def get_permissions(self):
+        if self.action in ['create', 'update', 'partial_update', 'destroy', 'verify']:
+            return [IsAdminUser()]
+        return [permissions.AllowAny()]
+
+    @action(detail=True, methods=['post'], permission_classes=[permissions.AllowAny])
+    def review(self, request, pk=None):
+        service = self.get_object()
+        serializer = ServiceReviewSerializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        serializer.save(service=service)
+        return Response(serializer.data, status=status.HTTP_201_CREATED)
+
+    @action(detail=True, methods=['post'], permission_classes=[IsAdminUser])
+    def verify(self, request, pk=None):
+        service = self.get_object()
+        service.verify(request.user)
+        return Response({'message': f'{service.name} verified successfully.'})
+
+
+from django.urls import path, include
+from rest_framework.routers import DefaultRouter
+router = DefaultRouter()
+router.register(r'', ServiceViewSet, basename='service')
+urlpatterns = [path('', include(router.urls))]
