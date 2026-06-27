@@ -1,5 +1,2 @@
-from rest_framework.authentication import BaseAuthentication
-
-class AnonymousTokenAuthentication(BaseAuthentication):
-    def authenticate(self, request):
-        return None
+# Re-exported from permissions for cleaner imports
+from .permissions import AnonymousTokenAuthentication
