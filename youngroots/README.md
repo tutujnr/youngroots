@@ -21,7 +21,7 @@ youngroots/
 │   │   ├── celery.py               # Celery + Beat scheduler
 │   │   └── wsgi.py
 │   └── apps/
-│       ├── accounts/               # MODULE 1: Auth, users, roles, anonymous sessions
+│       ├── accounts/               # Auth, users, roles, anonymous sessions
 │       │   ├── models.py           #   User model + AnonymousToken
 │       │   ├── serializers.py
 │       │   ├── views.py
@@ -29,7 +29,7 @@ youngroots/
 │       │   ├── permissions.py      #   IsAdminUser, IsAdvocateOrAdmin, IsOwnerOrAdmin
 │       │   ├── authentication.py   #   Anonymous token auth backend
 │       │   └── admin.py
-│       ├── locator/                # MODULE 2: Service Locator (GeoDjango)
+│       ├── locator/                # Service Locator (GeoDjango)
 │       │   ├── models.py           #   Service, ServiceReview, Country
 │       │   ├── views.py            #   ServiceViewSet with geospatial search
 │       │   ├── urls.py
@@ -37,23 +37,23 @@ youngroots/
 │       │   └── management/
 │       │       └── commands/
 │       │           └── seed_data.py  # Demo data seeder
-│       ├── ai_assistant/           # MODULE 3: AI Chat (Claude/Anthropic)
+│       ├── ai_assistant/           # AI Chat (Claude/Anthropic)
 │       │   ├── models.py           #   ConversationSession, AIMessage + all views
 │       │   ├── views.py
 │       │   ├── urls.py
 │       │   └── admin.py
-│       ├── reports/                # MODULE 4: Anonymous Reporting
+│       ├── reports/                # Anonymous Reporting
 │       │   ├── models.py           #   Report, ReportNote (encrypted fields)
 │       │   ├── views.py
 │       │   ├── urls.py
 │       │   ├── tasks.py            #   Celery: crisis alerts, auto-assign, data purge
 │       │   └── admin.py
-│       ├── referrals/              # MODULE 5: Case Tracking & Referrals
+│       ├── referrals/              # Case Tracking & Referrals
 │       │   ├── models.py           #   Referral, CaseStep + all views
 │       │   ├── views.py
 │       │   ├── urls.py
 │       │   └── admin.py
-│       └── dashboard/              # MODULE 6: Advocacy Dashboard
+│       └── dashboard/              # Advocacy Dashboard
 │           ├── analytics.py        #   All metrics computation + views
 │           ├── views.py
 │           ├── urls.py
