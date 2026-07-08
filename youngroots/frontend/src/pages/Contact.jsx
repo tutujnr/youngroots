@@ -3,10 +3,10 @@ import { contactAPI } from '../utils/api';
 import toast from 'react-hot-toast';
 
 const CONTACTS = [
-  { ic: '✉️', title: 'Email', value: 'hello@youngroots.org' },
-  { ic: '📞', title: 'Helpline', value: '0800 YOUNGROOTS (toll-free)' },
-  { ic: '🟢', title: 'WhatsApp', value: '+254 700 000 927' },
-  { ic: '📍', title: 'Office', value: 'Westlands, Nairobi, Kenya' },
+  { ic: '✉️', title: 'Email', value: 'coming soon' },
+  { ic: '📞', title: 'Helpline', value: 'coming soon (toll-free)' },
+  { ic: '🟢', title: 'WhatsApp', value: 'coming soon' },
+  { ic: '📍', title: 'Office', value: 'coming soon, Kenya' },
 ];
 
 export default function Contact() {
