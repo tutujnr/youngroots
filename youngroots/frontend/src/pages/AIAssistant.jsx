@@ -8,7 +8,7 @@ const QUICK_QUESTIONS = [
   { label: 'My rights', q: 'What are my rights to access health services?' },
 ];
 
-const WA_NUMBER = '254700000927'; // matches settings.WHATSAPP_BOT_NUMBER
+const WA_NUMBER = 'coming soon'; // matches settings.WHATSAPP_BOT_NUMBER
 
 export default function AIAssistant() {
   const [tab, setTab] = useState('web');
