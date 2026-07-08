@@ -208,37 +208,6 @@ Full interactive docs at `/api/docs/`
 
 ---
 
-## 🛣️ MVP Roadmap
-
-### Phase 1 — Core (Weeks 1–4)
-- [x] Django project setup + all app scaffolding
-- [x] User model with anonymous sessions
-- [x] Service Locator API (with geospatial search)
-- [x] Anonymous Report submission
-- [x] Basic Case Tracking
-
-### Phase 2 — AI + Dashboard (Weeks 5–8)
-- [x] Claude AI assistant integration (Yara)
-- [x] Referral & CaseStep system
-- [x] Dashboard analytics with caching
-- [x] Celery tasks (crisis alerts, data purge, auto-assign)
-
-### Phase 3 — Frontend (Weeks 9–12)
-- [x] React SPA with all 6 modules
-- [x] Zustand auth store + anonymous flow
-- [x] i18n (EN/SW/FR/PT)
-- [x] Responsive layout
-
-### Phase 4 — Production (Weeks 13–16)
-- [ ] Real map integration (Leaflet + OpenStreetMap)
-- [ ] SMS alerts via Africa's Talking / Twilio
-- [ ] Offline PWA support (service worker)
-- [ ] Penetration testing + security audit
-- [ ] Load testing + performance tuning
-- [ ] USSD interface for feature phones
-
----
-
 ## 🌍 Localisation
 
 Supported languages: **English · Swahili · French · Portuguese**
