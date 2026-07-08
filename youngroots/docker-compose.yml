@@ -1,0 +1,56 @@
+version: '3.9'
+services:
+  db:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_DB: youngroots_db
+      POSTGRES_USER: youngroots_user
+      POSTGRES_PASSWORD: ${DB_PASSWORD:-devpassword}
+    volumes: [postgres_data:/var/lib/postgresql/data]
+    ports: ["5432:5432"]
+
+  redis:
+    image: redis:7-alpine
+    ports: ["6379:6379"]
+
+  backend:
+    build: ./backend
+    command: >
+      sh -c "python manage.py migrate &&
+             python manage.py seed_data &&
+             python manage.py runserver 0.0.0.0:8000"
+    volumes: ["./backend:/app"]
+    ports: ["8000:8000"]
+    env_file: ["./backend/.env"]
+    depends_on: [db, redis]
+    environment:
+      DB_HOST: db
+      REDIS_URL: redis://redis:6379/0
+
+  celery_worker:
+    build: ./backend
+    command: celery -A youngroots worker --loglevel=info
+    volumes: ["./backend:/app"]
+    env_file: ["./backend/.env"]
+    depends_on: [backend, redis]
+    environment:
+      DB_HOST: db
+      REDIS_URL: redis://redis:6379/0
+
+  celery_beat:
+    build: ./backend
+    command: celery -A youngroots beat --loglevel=info
+    volumes: ["./backend:/app"]
+    env_file: ["./backend/.env"]
+    depends_on: [celery_worker]
+    environment:
+      DB_HOST: db
+      REDIS_URL: redis://redis:6379/0
+
+  frontend:
+    build: ./frontend
+    ports: ["3000:80"]
+    depends_on: [backend]
+
+volumes:
+  postgres_data:
