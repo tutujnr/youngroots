@@ -1,0 +1,5 @@
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'DM Sans',sans-serif;background:#f8faf7;color:#1a1a1a;font-size:15px;-webkit-font-smoothing:antialiased}
+a{color:inherit}
+::-webkit-scrollbar{width:6px}
+::-webkit-scrollbar-thumb{background:#c0c0c0;border-radius:3px}
