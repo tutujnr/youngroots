@@ -2,9 +2,9 @@ import React, { useState, useEffect } from 'react';
 import { blogAPI } from '../utils/api';
 
 const FALLBACK = [
+  { id: 3, emoji: '🌍', bg: '#FAECE7', date: '02-05 June 2026', title: '9th Pan-African AYSRHR Scientific Conference', excerpt: 'Strengthening SRHR to Achieve Youth Agency, Full Potential and Meaningful Participation in Africa’s Dynamic Socio-Political and Economic Landscape.' },
   { id: 1, emoji: '📰', bg: '#E1F5EE', date: '12 May 2026', title: 'Why Anonymous Reporting Changes Everything', excerpt: 'How removing identity from the reporting process increased disclosures by 3x in our pilot regions.' },
   { id: 2, emoji: '🤖', bg: '#E6F1FB', date: '02 May 2026', title: 'Meet Yara: Building an AI That Listens', excerpt: 'The design choices behind our AI health guide — and why empathy was the hardest feature to build.' },
-  { id: 3, emoji: '🌍', bg: '#FAECE7', date: '18 Apr 2026', title: 'Expanding to Uganda and Tanzania', excerpt: 'Lessons learned bringing YoungRoots to two new countries this quarter.' },
 ];
 
 export default function Blog() {
